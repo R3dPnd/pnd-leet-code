@@ -1,19 +1,14 @@
 class Solution:
-    def isAnagram(self, s: str, t: str) -> bool:
-        s_hash = {}
-
-        for i in range(len(s)):
-            curr = s[i]
-            if curr not in s_hash.keys():
-                s_hash[curr] = []
-            s_hash[curr].append(curr)
-
-        for i in range(len(t)):
-            curr = t[i]
-            if curr not in s_hash.keys():
-                return False
-            if len(s_hash[curr]) == 1:
-                s_hash.pop(curr)
-            else:
-                s_hash[curr].pop()
-        return len(s_hash.values()) == 0
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        start = nums[0]
+        res = []
+        for i in range(1, len(nums)):
+            curr = nums[i]
+            prev = nums[i-1]
+            if curr != prev + 1 or i == len(nums)-1:
+                if prev == start:
+                    res.append(str(start))
+                else: 
+                    res.append(str(start) + "->" + str(prev))
+                start = curr
+        return res

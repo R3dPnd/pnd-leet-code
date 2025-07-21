@@ -29,9 +29,10 @@ Explanation: The ranges are:
 [6,6] --> "6"
 [8,9] --> "8->9"
  
+
 Constraints:
 
 0 <= nums.length <= 20
 -231 <= nums[i] <= 231 - 1
 All the values of nums are unique.
-nums is sorted in ascending order.
+nums is sorted in ascending order
