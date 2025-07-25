@@ -1,24 +1,15 @@
-from typing import List
-
-
-class Solution:
-    def summaryRanges(self, nums: List[int]) -> List[str]:
-        if not nums:
-            return []
-        start = nums[0]
-        res = []
-        for i in range(1, len(nums)):
-            curr = nums[i]
-            prev = nums[i-1]
-            if curr != prev + 1:
-                if prev == start:
-                    res.append(str(start))
+def commonPrefix(inputs):
+    # Write your code here
+    counts = []
+    for string in inputs:
+        count = 0
+        for char in range(len(string)):
+            right_pre = string[char:]
+            for i in range(len(right_pre)):
+                if right_pre[i] == string[i]:
+                    count += 1
                 else:
-                    res.append(f"{start}->{prev}")
-                start = curr
-        # Add the last range
-        if nums[-1] == start:
-            res.append(str(start))
-        else:
-            res.append(f"{start}->{nums[-1]}")
-        return res
+                    break
+        counts.append(count)
+            
+    return counts
