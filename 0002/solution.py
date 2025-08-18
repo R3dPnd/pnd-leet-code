@@ -8,32 +8,20 @@ class ListNode:
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        curr = l1
-        n = 0
-        l1_sum = 0
+        carry_over = 0
 
-        while curr:
-            l1_sum += curr.val * pow(10,n)
-            curr = curr.next
-            n+=1
+        new_head = ListNode(0)
+        curr = new_head
+        while l1 != None or l2 != None or carry_over != 0:
+            l1Val = l1.val if l1 else 0
+            l2Val = l2.val if l2 else 0
 
-        curr = l2
-        n = 0
-        l2_sum = 0
+            column_sum = l1Val +l2Val + carry_over
+            carry_over = column_sum // 10
+            newNode = ListNode(column_sum%10)
+            curr.next= newNode
+            curr = newNode
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
 
-        while curr:
-            l2_sum += curr.val * pow(10,n)
-            curr = curr.next
-            n+=1
-        
-        # Return the result list (skip the dummy head)
-        sum = l1_sum + l2_sum
-
-        head = None
-        while sum > 0:
-            place_val = sum % 10
-            sum = sum // 10
-            new_node = ListNode(place_val)
-            new_node.next = head
-            head = new_node
-        return head
+        return new_head.next
